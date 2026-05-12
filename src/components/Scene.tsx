@@ -1,0 +1,8 @@
+import { useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useGame } from '../game/store';
+export function Scene(){const {player,enemies,tick,setKey,attack,restart,gameOver}=useGame();
+useEffect(()=>{restart(); const kd=(e:KeyboardEvent)=>{const k=e.key.toLowerCase(); if(['w','a','s','d'].includes(k))setKey(k,true); if(k===' ')attack();}; const ku=(e:KeyboardEvent)=>setKey(e.key.toLowerCase(),false); const md=()=>attack(); window.addEventListener('keydown',kd);window.addEventListener('keyup',ku);window.addEventListener('mousedown',md); return ()=>{window.removeEventListener('keydown',kd);window.removeEventListener('keyup',ku);window.removeEventListener('mousedown',md)}},[attack,restart,setKey]);
+useFrame((_,dt)=>tick(Math.min(dt,0.033)));
+return <group><mesh rotation-x={-Math.PI/2} receiveShadow><planeGeometry args={[20,20]} /><meshStandardMaterial color="#2d2d33" /></mesh>{[[0,0,-10],[0,0,10],[-10,0,0],[10,0,0]].map((p,i)=><mesh key={i} position={p as [number,number,number]} rotation-y={i>1?Math.PI/2:0}><boxGeometry args={[20,4,0.5]} /><meshStandardMaterial color="#4a4a50" /></mesh>)}<mesh position={[player.x,0.6,player.z]}><capsuleGeometry args={[0.4,0.8,8,12]} /><meshStandardMaterial color={gameOver?'#883333':'#66aaff'} emissive="#223344" /></mesh>{enemies.map(e=><group key={e.id} position={[e.x,0,e.z]}><mesh position={[0,0.5,0]}><boxGeometry args={[0.8,1,0.8]} /><meshStandardMaterial color="#aa4444" /></mesh><mesh position={[0,1.3,0]}><planeGeometry args={[0.9,0.1]} /><meshBasicMaterial color="#222" /></mesh><mesh position={[-0.45+0.45*(e.hp/e.maxHp),1.31,0.01]}><planeGeometry args={[0.9*(e.hp/e.maxHp),0.08]} /><meshBasicMaterial color="#4f4" /></mesh></group>)}</group>
+}
