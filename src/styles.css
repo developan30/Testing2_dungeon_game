@@ -1,0 +1,4 @@
+html,body,#root,.app{margin:0;width:100%;height:100%;overflow:hidden;background:#0d0d12;color:#fff;font-family:system-ui}
+.ui{position:fixed;left:12px;top:12px;background:#0008;padding:10px 12px;border:1px solid #555;border-radius:8px;min-width:180px}
+.controls{margin-top:10px;font-size:12px;opacity:.9}.gameover{margin-top:12px}.gameover button{padding:8px 12px;background:#c33;color:#fff;border:0;border-radius:6px;cursor:pointer}
+canvas{display:block}

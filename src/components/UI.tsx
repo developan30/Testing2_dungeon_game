@@ -1,0 +1,2 @@
+import { useGame } from '../game/store';
+export function UI(){const {player,wave,score,gameOver,restart}=useGame(); return <div className='ui'><div>HP: {Math.ceil(player.hp)}/{player.maxHp}</div><div>Wave: {wave}</div><div>Score: {score}</div><div className='controls'>WASD Move • Space/Click Attack</div>{gameOver&&<div className='gameover'><h2>Game Over</h2><button onClick={restart}>Restart</button></div>}</div>}
